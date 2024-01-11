@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('interest_id');
-            $table->string('image');
+            $table->string('image')->default('placeholder.png');
             $table->timestamps();
         });
     }
