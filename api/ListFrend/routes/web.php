@@ -8,6 +8,7 @@ use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInterestsController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,18 @@ Route::get('/admin/userinterests/{id}/edit', [UserInterestsController::class, 'e
 Route::post('/admin/userinterests/store', [UserInterestsController::class, 'store'])->name('userinterests.store');
 Route::put('/admin/userinterests/update/{id}', [UserInterestsController::class, 'update'])->name('userinterests.update');
 Route::delete('/admin/userinterests/delete/{id}', [UserInterestsController::class, 'destroy'])->name('userinterests.destroy');
+
+
+
+// En web.php
+Route::get('/search', [PanelController::class, 'search'])->name('search');
+
+Route::put('/admin/{id}', [AdminController::class, 'update'])->name('editar-usuario');
+Route::get('/config', [PanelController::class, 'config'])->name('config');
+
+
+
+
+
+
+

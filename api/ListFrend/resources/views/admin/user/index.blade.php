@@ -4,76 +4,62 @@
 
 @section('content')
 <main>
-    <div class="container mt-3">
-        <h1 class="mt-4">
-            <a href="{{ route('admin') }}" style="color: #212529; text-decoration: none; margin-right: 10px;"><i class="fas fa-arrow-left"></i></a>
-            Usuarios
-        </h1>
-
-        <!-- Alerta de éxito -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="h3 mb-3">Usuarios</h1>
             </div>
-        @endif
-
-        <!-- Número de resultados mostrados -->
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active" style="display: flex; align-items: center;">
-                <div>
-                    Mostrando <b>{{ $users->count() }}</b> resultados
-                    de un total de <b>{{ $users->total() }}</b>
-                </div>
-            </li>
-        </ol>
-
-        <!-- Botón para añadir usuario -->
-        <div class="mb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fas fa-plus"></i> Añadir Usuario</button>
+            <div class="col-md-6 text-end">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(auth()->user()->level_id != 1)
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fas fa-plus"></i> Añadir Usuario</button>
+                @endif
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <p>Mostrando <strong>{{ $users->count() }}</strong> resultados de un total de <strong>{{ $users->total() }}</strong></p>
         </div>
 
-        <!-- Tabla de usuarios -->
-        <table class="table table-hover" style="border: 2px solid #212529; color: #212529;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo Electrónico</th>
-                    <th>Teléfono</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <!-- Botón para editar -->
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary" role="button"><i class="fas fa-edit"></i></a>
-                            <!-- Formulario para eliminar -->
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            </form>                            
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5" class="ulpgcds-pager">
-                        {{-- Enlaces de paginación --}}
-                        {{ $users->links('pagination::bootstrap-5') }}
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>
+                                @if(auth()->user()->level_id != 1)
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 @endsection
@@ -102,7 +88,9 @@
                         <label for="phone" class="form-label">Teléfono</label>
                         <input type="text" class="form-control" id="phone" name="phone" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>

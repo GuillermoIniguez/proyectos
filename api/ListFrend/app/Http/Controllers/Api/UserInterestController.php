@@ -14,8 +14,8 @@ class UserInterestController extends Controller
         foreach($UserInterest as $UserInterest) {
             $object = [
                 "id" => $UserInterest->id,
-                "user_id" => $UserInterest->user_id,
-                "interest_id" => $UserInterest->interest_id,
+                "user_id" => $UserInterest->user,
+                "interest_id" => $UserInterest->interest,
                 "Created" => $UserInterest->updated_at,
                 "Updated" => $UserInterest->updated_at
 

@@ -14,6 +14,7 @@
             <li class="breadcrumb-item active">{{auth()->user()->level->name }}</li>
         </ol>
         <div class="row">
+            @if(auth()->user()->level_id != 1)
             <div class="col-md-4">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Matches</div>
@@ -23,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            
+            @endif
             <div class="col-md-4">
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body">Intereses</div>
@@ -33,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            @if(auth()->user()->level_id != 1)
             <div class="col-md-4">
                 <div class="card bg-success text-white mb-4">
                     <div class="card-body">Intereses Usuario</div>
@@ -42,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-md-4">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Usuarios</div>
@@ -61,54 +64,5 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-tag me-1"></i>
-                        Marca más usada
-                    </div>
-                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-exclamation me-1"></i>
-                        Servicio  más demandado
-                    </div>
-                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fa-solid fa-registered"></i>
-                Registros Reientes
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Empleado</th>
-                            <th>Refaccion</th>
-                            <th>Servicio</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </main>
 @endsection

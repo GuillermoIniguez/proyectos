@@ -4,69 +4,56 @@
 
 @section('content')
 <main>
-    <div class="container mt-3">
-        <h1 class="mt-4">
-            <a href="{{ route('admin') }}" style="color: #212529; text-decoration: none; margin-right: 10px;"><i class="fas fa-arrow-left"></i></a>
-            Intereses
-        </h1>
-
-        <!-- Alerta de éxito -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="h3 mb-3">Intereses</h1>
             </div>
-        @endif
-
-        <!-- Número de resultados mostrados -->
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active" style="display: flex; align-items: center;">
-                <div>
-                    Mostrando <b>{{ $userinterests->count() }}</b> resultados
-                    de un total de <b>{{ $userinterests->total() }}</b>
-                </div>
-            </li>
-        </ol>
-
-        <!-- Botón para añadir interés -->
-        <div class="mb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInterestModal"><i class="fas fa-plus"></i> Añadir Interés</button>
+            <div class="col-md-6 text-end">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addInterestModal"><i class="fas fa-plus"></i> Añadir Interés</button>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <p>Mostrando <strong>{{ $userinterests->count() }}</strong> resultados de un total de <strong>{{ $userinterests->total() }}</strong></p>
         </div>
 
-        <!-- Tabla de intereses -->
-        <table class="table table-hover" style="border: 2px solid #212529; color: #212529;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User ID</th>
-                    <th>Interest ID</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($userinterests as $userinterests)
-                <tr>
-                    <td>{{ $userinterests->id }}</td>
-                    <td>{{ $userinterests->user_id }}</td>
-                    <td>{{ $userinterests->interest_id }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <!-- Botón para editar -->
-                            <a href="{{ route('userinterests.edit', $userinterests->id) }}" class="btn btn-primary" role="button"><i class="fas fa-edit"></i></a>
-                            <!-- Formulario para eliminar -->
-                            <form action="{{ route('userinterests.destroy', $userinterests->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            </form>                            
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-              
-            </tfoot>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Interest ID</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($userinterests as $userinterest)
+                        <tr>
+                            <td>{{ $userinterest->id }}</td>
+                            <td>{{ $userinterest->user ? $userinterest->user->name : 'Usuario no encontrado' }}</td>
+                            <td>{{ $userinterest->interest ? $userinterest->interest->name : 'Interes no encontrado' }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('userinterests.edit', $userinterest->id) }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('userinterests.destroy', $userinterest->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 
@@ -90,7 +77,9 @@
                         <label for="interest_id" class="form-label">Interest ID</label>
                         <input type="number" class="form-control" id="interest_id" name="interest_id" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>

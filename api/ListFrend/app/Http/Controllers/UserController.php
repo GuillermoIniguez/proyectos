@@ -38,7 +38,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$id,
             'phone' => 'required|string|max:255|unique:users,phone,'.$id,
-            'surname' => 'nullable|string|max:255', 
+            'surname' => 'nullable|string|max:255', // Agrega validación para el apellido
         ]);
 
         $user = User::findOrFail($id);
