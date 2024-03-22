@@ -85,6 +85,22 @@
     </button>
 </div>
 
+<section id="informativa" class="container-fluid section-container" style="background-color: #fff; color: #212529; padding: 100px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>¡Únete a la Comunidad!</h2>
+                <p>Descubre una nueva forma de conectar con personas que comparten tus intereses. En ListFrend, te ofrecemos una plataforma fácil de usar donde puedes conocer a personas afines y establecer relaciones significativas.</p>
+<p>Ya sea que te apasione la música, la lectura, el deporte o cualquier otra actividad, ¡aquí encontrarás a tu próximo amigo o amiga!</p>
+</div>
+<div class="col-md-6">
+<!-- Aquí puedes agregar cualquier imagen o elemento visual que desees -->
+<img src="{{ asset('image/comunidad.webp') }}" class="img-fluid" alt="Comunidad">
+</div>
+</div>
+</div>
+</section>
+
 <!-- Sección de ListFrend -->
 <section id="listfrend" class="container-fluid section-container" style="background-color: #fff; color: #212529; padding: 100px 0;">
     <div class="container text-center">
@@ -92,6 +108,9 @@
         <p class="text-center">Somos una plataforma que se dedica a conectar personas con intereses similares para que puedan establecer relaciones significativas y duraderas.</p>
     </div>
 </section>
+
+
+
 
 <!-- Sección de Nombres de Intereses -->
 <section id="nombres" class="container-fluid section-container" style="background-color: #fff; color: #212529; padding: 100px 0;">
@@ -108,7 +127,6 @@
         </div>
     </div>
 </section>
-
 <!-- Sección de Categorías de Intereses -->
 <section id="categorias" class="container-fluid section-container" style="background-color: #f8f9fa; color: #212529; padding: 100px 0;">
     <div class="container text-center">
@@ -155,10 +173,10 @@
     </div>
 </section>
 
+
 <!-- Pie de Página -->
 <footer class="text-center p-4 text-white" style="background-color: #212529;">
     <p>© [2024] Derechos de autor. Desarrollado por 
         <a href="https://www.instagram.com/guille_iniguez/" style="color: #27d7f7;">[Guillermo Iñiguez]</a>. Todos los derechos reservados.</p>
 </footer>
 @endsection
-
